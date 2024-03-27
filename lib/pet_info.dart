@@ -7,29 +7,37 @@ import 'package:http/http.dart' as http;
 class PetInformationPage extends StatelessWidget {
   final String petName;
   final String petType;
+  final String petSpecies;
   final int id;
 
   const PetInformationPage({
     Key? key,
     required this.petName,
     required this.petType,
+    required this.petSpecies,
     required this.id,
+
+    
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Image.asset('assets/logo.png', width: 60),
+        backgroundColor: Color.fromARGB(255, 13, 132, 17), 
+        centerTitle: true,
         title: Text('Pet Information'),
       ),
+      backgroundColor:Color.fromARGB(255, 13, 132, 17) ,
       floatingActionButton: SpeedDial(
-        backgroundColor: Colors.blue[200],
+        backgroundColor: const Color.fromARGB(255, 0, 140, 255),
         icon: Icons.menu,
         children: [
           SpeedDialChild(
             child: Icon(Icons.pending_actions),
-            backgroundColor: Colors.green,
-            label: 'Log Feeding Time',
+            backgroundColor:  Color.fromARGB(255, 13, 132, 17,),
+            label: 'Feeding Time Log',
             onTap: () {
               showLastFoodDialog(context);
             },
@@ -37,11 +45,11 @@ class PetInformationPage extends StatelessWidget {
           SpeedDialChild(
             child: Icon(Icons.pending_actions),
             backgroundColor: Colors.orange,
-            label: 'Log Shedding Time',
+            label: 'Molt/Shed Log',
             onTap: () {
               _showSheddingDateTimePicker(context);
             },
-          ),
+          ), 
         ],
       ),
       body: Padding(
@@ -56,19 +64,20 @@ class PetInformationPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Name: $petName',
+                      'Common Name: $petName',
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 10),
                     Text(
+                      'Species/Scientific Name: $petSpecies',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                     Text(
                       'Type: $petType',
                       style: TextStyle(fontSize: 18),
                     ),
-                    Text(
-                      'ID: $id',
-                      style: TextStyle(fontSize: 18),
-                    ),
+                    
                   ],
                 ),
               ),
@@ -223,12 +232,12 @@ class PetInformationPage extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Enter Text'),
+          title: Text('Food Type:'),
           content: TextField(
             onChanged: (value) {
               thefood = value;
             },
-            decoration: InputDecoration(hintText: 'Enter text here'),
+            decoration: InputDecoration(hintText: ''),
           ),
           actions: <Widget>[
             TextButton(
@@ -281,7 +290,7 @@ class PetInformationPage extends StatelessWidget {
   }
 
   Future<List<String>?> fetchLastFed(int petid) async {
-    var link = "http://192.168.1.3/exopet/pet.php/";
+    var link = "http://192.168.180.62/exopet/pet.php/";
 
     final Map<String, dynamic> json = {"pet_id": petid};
     final query = {
@@ -317,7 +326,7 @@ class PetInformationPage extends StatelessWidget {
   }
 
   Future<List<String>?> fetchLastShed(int petid) async {
-    var link = "http://192.168.1.3/exopet/pet.php/";
+    var link = "http://192.168.180.62/exopet/pet.php/";
 
     final Map<String, dynamic> json = {"pet_id": petid};
     final query = {
@@ -353,7 +362,7 @@ class PetInformationPage extends StatelessWidget {
   }
 
   Future<void> addFeedingTime(int petid, DateTime lastfed, String food) async {
-    var link = "http://192.168.1.3/exopet/pet.php";
+    var link = "http://192.168.180.62/exopet/pet.php";
 
     // Convert DateTime to a string representation
     String formattedDate = lastfed.toIso8601String();
@@ -380,7 +389,7 @@ class PetInformationPage extends StatelessWidget {
   }
 
   Future<void> addSheddingTime(int petid, DateTime lastfed) async {
-    var link = "http://192.168.1.3/exopet/pet.php";
+    var link = "http://192.168.180.62/exopet/pet.php";
 
     // Convert DateTime to a string representation
     String formattedDate = lastfed.toIso8601String();

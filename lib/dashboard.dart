@@ -80,15 +80,18 @@ class _DashboardState extends State<Dashboard> {
                   final petName = petData['petname'] as String;
                   final petType = petData['pettype'] as String;
                   final petId = petData['id'];
+                  final petSpecs = petData['pettype'] as String;
                   return GestureDetector(
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => PetInformationPage(
-                                  petName: petName,
-                                  petType: petType,
-                                  id: petId)));
+                                    petName: petName,
+                                    petType: petType,
+                                    id: petId,
+                                    petSpecies: petSpecs,
+                                  )));
                     },
                     child: Card(
                       child: ListTile(
