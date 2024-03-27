@@ -20,7 +20,7 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Future<List<dynamic>?> fetchPets() async {
-    var link = "http://192.168.1.3/exopet/pet.php/";
+    var link = "http://192.168.1.7/exopet/pet.php/";
 
     final query = {
       "operation": "getpets",
@@ -271,7 +271,7 @@ class _DashboardState extends State<Dashboard> {
 }
 
 Future<void> addPet(String petName, String petType) async {
-  var link = "http://192.168.1.3/exopet/pet.php";
+  var link = "http://192.168.1.7/exopet/pet.php";
 
   final Map<String, dynamic> json = {"petname": petName, "pettype": petType};
   final Map<String, dynamic> query = {
@@ -291,7 +291,7 @@ Future<void> addPet(String petName, String petType) async {
 }
 
 Future<void> deletePet(int petId) async {
-  var link = "http://192.168.1.3/exopet/pet.php";
+  var link = "http://192.168.1.7/exopet/pet.php";
 
   final Map<String, dynamic> json = {"pet_id": petId};
   final Map<String, dynamic> query = {
@@ -311,7 +311,7 @@ Future<void> deletePet(int petId) async {
 }
 
 Future<void> updatePet(int petId, String name, String pettype) async {
-  var link = "http://192.168.1.3/exopet/pet.php";
+  var link = "http://192.168.1.7/exopet/pet.php";
 
   final Map<String, dynamic> json = {
     "pet_id": petId,

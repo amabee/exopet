@@ -177,7 +177,7 @@ class HomePage extends StatelessWidget {
   }
 
   void login(BuildContext context, String username, String password) async {
-    var link = "http://192.168.1.3/exopet/pet.php/";
+    var link = "http://192.168.1.7/exopet/pet.php/";
 
     try {
       final jsonData = {
